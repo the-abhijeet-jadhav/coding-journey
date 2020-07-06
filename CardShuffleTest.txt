@@ -1,0 +1,93 @@
+package cardGame;
+
+import java.util.ArrayList;
+import java.lang.StringBuilder;
+import java.util.Collections;
+import java.util.ListIterator;
+import java.util.Random;
+ 
+public class CardShuffleTest {
+
+	
+	 ArrayList<String> cardSuitandRank = new  ArrayList<String>() ;
+	
+	
+	public ArrayList<String> createDeck() {
+		
+		
+        String suit= "Joker";
+		char[] suits = {'H','D','S','C'};
+       // String[] suits = {"Diamonds","Clubs","Hearts","Spades"};
+        //String[] ranks = {"King","Queen","Jack","Ten","Nine","Eight","Seven","Six","Five","Four","Three","Two","Ace"};
+
+		
+        StringBuilder sb = new StringBuilder();
+
+		
+		for (int idx1 = 0; idx1 < 1; idx1++){
+			sb.append(suit);
+			cardSuitandRank.add(sb.toString());
+			sb.delete(0,sb.length());
+		}
+        
+		for ( int cnt = 0; cnt < 4; cnt++ ) {
+			cardSuitandRank = setDeck(suits[cnt], sb);
+			
+		}
+			
+		
+		for (int idx1 = 0; idx1 < 1; idx1++){
+			sb.append(suit);
+			cardSuitandRank.add(sb.toString());
+			sb.delete(0,sb.length());
+		}
+
+		for ( int cnt = 0; cnt < 4; cnt++ ) {
+			cardSuitandRank = setDeck(suits[cnt], sb);
+		}
+		
+		return cardSuitandRank;
+	
+	}
+
+    public static void main(String[] args) {
+ 
+   
+    	ArrayList<String>  cardSuitandRank = new ArrayList<String>();
+        cardSuitandRank.ensureCapacity(106);
+ 	
+		CardShuffleTest cs = new CardShuffleTest();
+		cardSuitandRank = cs.createDeck();
+		
+        ListIterator<String> iter = cardSuitandRank.listIterator();
+        System.out.println("Prior to shuffle");
+ 
+        do { 
+            System.out.println(iter.next());
+ 
+        } while (iter.hasNext());
+ 
+        Collections.shuffle(cardSuitandRank, new Random());
+ 
+        ListIterator<String> iter2 = cardSuitandRank.listIterator();
+        System.out.println("After shuffle");
+ 
+        do {
+             System.out.println(iter2.next());
+         } while (iter2.hasNext());
+    }
+   
+   
+      public  ArrayList<String> setDeck(char suits, StringBuilder sb) {
+        
+        for (int rank = 0; rank < 13;) { 
+            sb.append(suits);
+            rank++;
+            sb.append(rank);
+            cardSuitandRank.add(sb.toString());
+            sb.delete(0,sb.length());
+        }
+		return cardSuitandRank;
+	}
+      
+}
